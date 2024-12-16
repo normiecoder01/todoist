@@ -1,0 +1,357 @@
+<div class="wrapper d-flex flex-column min-vh-100">
+    <app-header></app-header>
+    <main class="container-fluid mt-4 flex-grow-1 d-flex">
+      <!-- Admin Sidebar -->
+<nav id="adminSidebar" class="admin-sidebar vh-100">
+  <div class="sidebar-header d-flex justify-content-between align-items-center px-3 py-2">
+    <h3 class="text-light">Admin Panel</h3>
+    <button class="btn btn-light btn-sm" id="sidebarCollapse">
+      <i class="pi pi-bars"></i>
+    </button>
+  </div>
+  <div class="sidebar-content position-sticky">
+    <ul class="nav flex-column">
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('dashboard')">
+          <i class="pi pi-th-large me-2"></i> Dashboard
+        </a>
+      </li>
+
+      <!-- User Management -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-management')">
+          <i class="pi pi-users me-2"></i> User Management
+        </a>
+      </li>
+
+      <!-- Task Management -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('task-management')">
+          <i class="pi pi-bookmark-fill me-2"></i> My Task
+        </a>
+      </li>
+
+      <!-- User Task Management -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-task-management')">
+          <i class="pi pi-book me-2"></i> User Task
+        </a>
+      </li>
+
+      <!-- Reports -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('reports')">
+          <i class="pi pi-chart-bar me-2"></i> All Reports
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+       <!-- Main Content -->
+       <div class="container mt-4">
+        <!-- Title and Add Task Button -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>Pending Tasks</h2>
+          <button pButton type="button" class="btn btn-success" (click)="addTask()">
+            <i class="pi pi-plus"></i> Add Task
+          </button>
+        </div>
+        <!-- Search Bar and Filter Dropdowns -->
+        <div class="mb-4 mt-2 shadow-lg p-4">
+          <div class="mb-3">
+            <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Search" class="form-control"
+              style="width: 650px;" (input)="filterTasks()" autofocus />
+          </div>
+          <p-dropdown [options]="taskPriorities" [(ngModel)]="selectedPriority" placeholder="Filter by Priority"
+            (onChange)="filterTasks()"></p-dropdown>
+          <!-- Bucket Dropdown
+          <p-dropdown [options]="bucketOptions" [(ngModel)]="selectedBucket" placeholder="Filter by Bucket"
+            (onChange)="filterTasks()" optionLabel="label" optionValue="value">
+          </p-dropdown> -->
+          <button pButton type="button" class="btn btn-secondary me-5" (click)="clearFilters()">Reset Filters</button>
+            <!-- Show Completed Tasks Button -->
+        <button pButton type="button" class="btn btn-outline-primary me-5" (click)="showCompletedTasks()">
+          Show Completed Tasks
+        </button>
+          <!-- Manage Bucket Button -->
+          <button pButton type="button" class="btn btn-outline-secondary" icon="pi pi-cart-plus" label="Manage Buckets"
+            (click)="openManageBucketsModal()">
+          </button>
+        </div>
+        <!-- Task Table -->
+        <div class="mt-4 shadow-lg p-4 rounded-lg">
+          <p-table [value]="filteredTasks" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+              <tr>
+                <th><i class="pi pi-book" aria-hidden="true" title="Task Title"></i>Task Title</th>
+                <th><i class="pi pi-cart-plus" aria-hidden="true" title="Bucket"></i>Bucket</th>
+                <th><i class="pi pi-check" aria-hidden="true" title="Status"></i>Mark Completed</th>
+                <th><i class="pi pi-calendar" aria-hidden="true" title="Due Date"></i>Due Date</th>
+                <th><i class="pi pi-sort-amount-up" aria-hidden="true" title="Priority"></i>Priority</th>
+                <th><i class="pi pi-user" aria-hidden="true" title="Assigned To"></i>Assigned By</th>
+                <th><i class="pi pi-chart-line" aria-hidden="true" title="Progress"></i>Progress</th>
+                <th><i class="pi pi-cog" aria-hidden="true" title="Action"></i>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-task>
+              <tr>
+                <td>{{ task.taskTitle }}</td>
+                <td>{{ task.bucketName }}</td> <!-- Displaying bucket name -->
+                <!-- HTML for marking tasks as complete or pending -->
+                <td>
+                  <button *ngIf="task.isComplete" class="btn btn-outline-success"
+                    (click)="markTaskAsPending(task.todoTaskId)">
+                    <i class="pi pi-check"></i> <!-- If task is complete, allow marking it as pending -->
+                  </button>
+                  <button *ngIf="!task.isComplete" class="btn btn-outline-success"
+                    (click)="markTaskAsCompleted(task.todoTaskId)">
+                    <i class="pi pi-times"></i> <!-- If task is incomplete, allow marking it as complete -->
+                  </button>
+                </td>
+                <td>{{ task.dueDate | date }}</td>
+                <td>{{ task.taskPriority }}</td>
+                <td>{{ task.assignedToUserName }}</td> <!-- Assigned to user name -->
+                <td>
+                  <div class="task-progress">
+                    <p-slider [(ngModel)]="task.percentageComplete"
+                      (onChange)="updateProgress(task.todoTaskId, task.percentageComplete)" [min]="0" [max]="100" [step]="5"
+                      [style]="{width: '150px'}">
+                    </p-slider>
+                    <span>{{ task.percentageComplete }}%</span> <!-- Display the percentage next to the slider -->
+                  </div>
+      
+                </td>
+                <!-- Info Button -->
+                <button pButton icon="pi pi-info-circle" class="p-button-rounded p-button-info mr-2"
+                  (click)="showTaskInfo(task)"></button>
+                <!-- Delete Button -->
+                <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                  (click)="deleteTask(task.todoTaskId)"></button>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      
+        
+      
+        <!-- Add Task Modal -->
+        <p-dialog header="Add Task" [(visible)]="displayModal" [modal]="true" [responsive]="true" [style]="{width: '60vw'}"
+          [closable]="false">
+          <form [formGroup]="taskForm" class="p-fluid">
+            <!-- Task Title -->
+            <div class="p-field mb-3">
+              <label for="taskTitle" class="form-label">Title <span class="required-field">*</span></label>
+              <input id="taskTitle" type="text" formControlName="taskTitle" pInputText placeholder="Enter task title"
+                class="w-100" />
+              <small *ngIf="taskForm.get('taskTitle')?.invalid && taskForm.get('taskTitle')?.touched" class="p-error">
+                Task title is required
+              </small>
+            </div>
+      
+            <!-- Task Description -->
+            <div class="p-field mb-3">
+              <label for="taskDescription" class="form-label">Description</label>
+              <textarea id="taskDescription" formControlName="taskDescription" pInputTextarea
+                placeholder="Enter task description" class="w-100"></textarea>
+              <small *ngIf="taskForm.get('taskDescription')?.invalid && taskForm.get('taskDescription')?.touched"
+                class="p-error">Description is required</small>
+            </div>
+      
+            <div class="p-grid">
+              <!-- Bucket -->
+              <div class="p-col-12 p-md-6 mb-3">
+                <label for="bucket" class="form-label">Bucket <span class="required-field">*</span></label>
+                <p-dropdown id="bucket" formControlName="bucketId" [options]="bucketOptions" placeholder="Select Bucket"
+                  class="w-100"></p-dropdown>
+              </div>
+      
+              <!-- Priority -->
+              <div class="p-col-12 p-md-6 mb-3">
+                <label for="priority" class="form-label">Priority <span class="required-field">*</span></label>
+                <p-dropdown id="priority" formControlName="taskPriority" [options]="taskPriorities"
+                  placeholder="Select Priority" class="w-100"></p-dropdown>
+              </div>
+      
+              <!-- Due Date -->
+              <div class="p-col-12 p-md-6 mb-3">
+                <label for="dueDate" class="form-label">Due Date <span class="required-field">*</span></label>
+                <p-calendar id="dueDate" formControlName="dueDate" dateFormat="mm/dd/yy" [showIcon]="true" [minDate]="today"
+                  class="w-100"></p-calendar>
+              </div>
+      
+              <!-- Repeat -->
+              <div class="p-col-12 p-md-6 mb-3">
+                <label for="repeat" class="form-label">Repeat <span class="required-field">*</span></label>
+                <p-dropdown id="repeat" formControlName="repeatFrequency" [options]="repeatOptions"
+                  placeholder="Select Repeat" class="w-100"></p-dropdown>
+              </div>
+      
+              <div class="p-col-12 p-md-6 mb-3">
+                <label for="fileUpload" class="form-label">Add File</label>
+                <div class="file-upload-container">
+                  <!-- File input field -->
+                  <input id="fileUpload" type="file" (change)="onFileSelected($event)" class="form-control-file" />
+                </div>
+                <small class="text-muted">You can add a file attachment to this task (optional).</small>
+              </div>
+      
+      
+            </div>
+          </form>
+      
+          
+      
+          <p-footer class="p-d-flex p-jc-end">
+            <button pButton label="Save" icon="pi pi-check" class="p-button-success me-2" (click)="saveTask()"
+              [disabled]="taskForm.invalid"></button>
+            <button pButton label="Cancel" icon="pi pi-times" class="p-button-secondary"
+              (click)="displayModal=false"></button>
+          </p-footer>
+        </p-dialog>
+      
+        <!-- Task Info Modal -->
+        <p-dialog header="Task Details" [(visible)]="displayTaskInfo" [modal]="true" [responsive]="true"
+          [style]="{width: '50vw'}">
+          <div *ngIf="selectedTask">
+            <p><strong>Title:</strong> {{ selectedTask.taskTitle }}</p>
+            <p><strong>Description:</strong> {{ selectedTask.taskDescription }}</p>
+            <p><strong>Priority:</strong> {{ selectedTask.taskPriority }}</p>
+            <p><strong>Mark Completed:</strong> {{ selectedTask.isComplete ? 'Completed' : 'Pending' }}</p>
+            <p><strong>Assigned To:</strong> {{ selectedTask.assignedToUserName }}</p>
+            <p><strong>Progress:</strong> {{ selectedTask.percentageComplete }}%</p>
+            <p><strong>Due Date:</strong> {{ selectedTask.dueDate | date }}</p>
+            <p><strong>Bucket:</strong> {{ selectedTask.bucketName }}</p>
+          </div>
+          <p-footer>
+            <button pButton label="Close" icon="pi pi-times" class="p-button-secondary"
+              (click)="displayTaskInfo = false"></button>
+          </p-footer>
+        </p-dialog>
+      
+        <!-- Manage Buckets Modal -->
+        <p-dialog header="Manage Buckets" [(visible)]="displayBucketModal" [modal]="true" [responsive]="true"
+          [style]="{width: '50vw'}">
+          <div class="p-fluid">
+            <h3>Existing Buckets</h3>
+      
+            <!-- PrimeNG Table to display the buckets -->
+            <p-table [value]="buckets" class="mb-3">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Bucket Name</th>
+                  <th style="text-align: center">Actions</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-bucket>
+                <tr>
+                  <td>
+                    <!-- Display the bucket name or input field for editing -->
+                    <span *ngIf="editingBucketId !== bucket.bucketId">{{ bucket.bucketName }}</span>
+                    <input *ngIf="editingBucketId === bucket.bucketId" type="text" [(ngModel)]="editedBucketName"
+                      pInputText />
+                  </td>
+                  <td style="text-align: center">
+                    <!-- Edit and Delete buttons -->
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-warning p-button-sm mr-2"
+                      (click)="onEditClick(bucket)"></button>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm mr-2"
+                      (click)="deleteBucket(bucket.bucketId)"></button>
+                    <button *ngIf="editingBucketId === bucket.bucketId" pButton label="Save"
+                      class="p-button-success p-button-sm" (click)="saveBucket(bucket.bucketId)"></button>
+                    <button *ngIf="editingBucketId === bucket.bucketId" pButton label="Cancel"
+                      class="p-button-secondary p-button-sm" (click)="cancelEdit()"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+      
+            <div class="p-field mt-3">
+              <label for="newBucketName">Add New Bucket</label>
+              <input id="newBucketName" type="text" [(ngModel)]="newBucketName" pInputText placeholder="Enter new bucket name"
+                class="w-100" />
+            </div>
+            <button pButton label="Add Bucket" icon="pi pi-plus" class="btn p-button-success mt-3"
+              (click)="addBucket()"></button>
+          </div>
+        </p-dialog>
+      
+      
+        <!-- Completed Tasks Modal -->
+      <p-dialog header="Completed Tasks" [(visible)]="displayCompletedTasksModal" [modal]="true" [style]="{width: '60vw'}" [responsive]="true">
+        <div *ngIf="completedTasks.length > 0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Task Title</th>
+                <th>Priority</th>
+                <th>Assigned By</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of completedTasks">
+                <td>{{ task.taskTitle }}</td>
+                <td>{{ task.taskPriority }}</td>
+                <td>{{ task.createdBy }}</td>
+                <td>{{ task.dueDate | date }}</td>
+                <td>
+                  <!-- View Info Button -->
+                  <button pButton icon="pi pi-info-circle" label="Info" class="p-button-text" (click)="showTaskInfo(task)"></button>
+      
+                  <!-- Delete Button -->
+                  <button pButton icon="pi pi-trash" label="Delete" class="p-button-danger p-button-text"
+                    (click)="deleteTask1(task.todoTaskId)">
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="completedTasks.length === 0">
+          <p>No completed tasks available.</p>
+        </div>
+      
+        <p-footer>
+          <button pButton label="Close" icon="pi pi-times" class="p-button-secondary" (click)="displayCompletedTasksModal = false"></button>
+        </p-footer>
+      </p-dialog>
+      
+      <!-- Task Info Modal -->
+      <p-dialog header="Task Info" [(visible)]="displayTaskInfoModal" [modal]="true" [style]="{width: '50vw'}" [responsive]="true">
+        <div *ngIf="selectedTask">
+          <p><strong>Title:</strong> {{ selectedTask.taskTitle }}</p>
+          <p><strong>Description:</strong> {{ selectedTask.taskDescription }}</p>
+          <p><strong>Priority:</strong> {{ selectedTask.taskPriority }}</p>
+          <p><strong>Assigned By:</strong> {{ selectedTask.createdBy }}</p>
+          <p><strong>Due Date:</strong> {{ selectedTask.dueDate | date }}</p>
+          <p><strong>Created Date:</strong> {{ selectedTask.createdDate | date }}</p>
+        </div>
+        <p-footer>
+          <button pButton label="Close" icon="pi pi-times" class="p-button-secondary" (click)="displayTaskInfoModal = false"></button>
+        </p-footer>
+      </p-dialog>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+       
+    </main>
+    <app-footer></app-footer>
+  </div>
+  
+  <!-- Backdrop and Assign Modal remain unchanged -->
+  

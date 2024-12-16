@@ -1,0 +1,25 @@
+<div class="welcome container-fluid">
+
+  <br class="tp-2">
+  <h2>User Task Count Report</h2>
+    <hr class="tp-2">
+<!-- /**
+   * Displays a data grid with the specified configuration and row data.
+   * The data grid supports row changes, row deletion, and bulk data saving.
+   * @param configData - The configuration data for the data grid.
+   * @param gridIterfaceConfig - The interface configuration for the data grid.
+   * @param rowData - The row data to be displayed in the data grid.
+   * @param rowChanged - Event emitted when a row is changed.
+   * @param deleteRow - Event emitted when a row is deleted.
+   * @param saveBulkData - Event emitted when bulk data is saved.
+   */ -->
+    <data-grid
+    [configData]="dataGridConfigProperties2686e84f11a3"
+    [gridIterfaceConfig]="dataGridInterfaceConfig2686e84f11a3"
+    [rowData]="dataGridConfigProperties2686e84f11a3.rowData"
+    (rowChanged)="gridRowChanged2686e84f11a3($event)"
+    (deleteRow)="onDeleteRow2686e84f11a3($event)"
+    (saveBulkData)="saveBulkData2686e84f11a3($event)"
+  >
+  </data-grid>
+</div>

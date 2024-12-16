@@ -1,0 +1,105 @@
+.modal.right .modal-body {
+  padding: 15px 15px 80px;
+}
+
+.modal-body {
+  max-height: 100vh !important;
+}
+
+.modal.right.fade .modal-dialog {
+  left: -320px;
+  -webkit-transition:
+    opacity 0.3s linear,
+    left 0.3s ease-out;
+  -moz-transition:
+    opacity 0.3s linear,
+    left 0.3s ease-out;
+  -o-transition:
+    opacity 0.3s linear,
+    left 0.3s ease-out;
+  transition:
+    opacity 0.3s linear,
+    left 0.3s ease-out;
+}
+
+.modal.right.fade.show .modal-dialog {
+  right: 0;
+}
+
+.modal-header {
+  border-bottom-color: #eeeeee;
+  background-color: #fafafa;
+}
+
+input {
+  height: 48px;
+}
+
+body {
+  background-color: #78909c;
+}
+
+.sidedrawer {
+  padding-top: 60px;
+  padding-bottom: 110px;
+}
+
+.modal-title {
+  font-size: 24px;
+}
+
+fa-icon {
+  cursor: pointer;
+}
+
+.input-number {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+/* Removing inbuild border SCSS for ng-select */
+::ng-deep .ng-select .ng-select-container {
+  &,
+  &:focus,
+  &:active,
+  &:hover {
+    border: 0px !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}
+
+.ng-select {
+  height: 48px;
+  width: 100%;
+  min-width: 64px;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  color: #4a154b;
+  line-height: 24px;
+  font-size: 16px;
+  padding: 0.5em 1em;
+}
+
+::ng-deep .ng-select.ng-select-opened.ng-select-bottom > .ng-select-container {
+  padding-bottom: 5px;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container {
+  padding-bottom: 5px;
+}
+
+::ng-deep .ng-dropdown-panel .scroll-host {
+  background: white;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover {
+  background-color: #4a154b;
+  color: white;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  height: 30px;
+}

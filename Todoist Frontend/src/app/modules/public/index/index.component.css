@@ -1,0 +1,75 @@
+/* General */
+.main {
+  background-color: #F0F6F6;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #084B83;
+  color: #F0F6F6;
+  padding: 70px 0;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: #BBE6E4;
+}
+
+.hero h2 {
+  color: #BBE6E4;
+}
+
+.btn-light {
+  background-color: #BBE6E4;
+  color: #0F1108;
+  border-color: transparent;
+}
+
+.btn-light:hover {
+  background-color: #A3D4D3;
+  color: #084B83;
+}
+
+/* Features Section */
+.features-section {
+  background-color: #F0F6F6;
+}
+
+.features-section h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #084B83;
+}
+
+.features-section i {
+  font-size: 3rem;
+  color: #0F1108;
+}
+
+.features-section h5 {
+  color: #084B83;
+}
+
+/* CTA Section */
+.cta-section {
+  background-color: #BBE6E4;
+  color: #0F1108;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  color: #0F1108;
+}
+
+.btn-dark {
+  background-color: #0F1108;
+  color: #F0F6F6;
+  border-color: transparent;
+}
+
+.btn-dark:hover {
+  background-color: #333333;
+  color: #F0F6F6;
+}
+
+

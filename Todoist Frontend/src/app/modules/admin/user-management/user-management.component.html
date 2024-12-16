@@ -1,0 +1,94 @@
+<div class="wrapper d-flex flex-column min-vh-100">
+  <app-header></app-header>
+  <main class="container-fluid mt-4 flex-grow-1 d-flex">
+    
+    <!-- Admin Navbar -->
+    <nav id="adminSidebar" class="admin-sidebar vh-100">
+      <div class="sidebar-header d-flex justify-content-between align-items-center px-3 py-2">
+        <h3 class="text-light">Admin Panel</h3>
+        <button class="btn btn-light btn-sm" id="sidebarCollapse">
+          <i class="pi pi-bars"></i>
+        </button>
+      </div>
+      <div class="sidebar-content position-sticky">
+        <ul class="nav flex-column">
+          <!-- Dashboard -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('dashboard')">
+              <i class="pi pi-th-large me-2"></i> Dashboard
+            </a>
+          </li>
+    
+          <!-- User Management -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-management')">
+              <i class="pi pi-users me-2"></i> User Management
+            </a>
+          </li>
+    
+          <!-- Task Management -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('task-management')">
+              <i class="pi pi-bookmark-fill me-2"></i> My Task
+            </a>
+          </li>
+    
+          <!-- User Task Management -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-task-management')">
+              <i class="pi pi-book me-2"></i> User Task
+            </a>
+          </li>
+    
+          <!-- Reports -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('reports')">
+              <i class="pi pi-chart-bar me-2"></i> All Reports
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+      <h2>User Management</h2>
+      
+      <!-- Search Bar -->
+      <div class="row mb-3">
+        <div class="col-4">
+          <input type="text" pInputText class="form-control" placeholder="Search by First Name or Username" [(ngModel)]="searchTerm" (input)="onSearch()"/>
+        </div>
+      </div>
+
+      <!-- User Table -->
+      <table class="table table-bordered shadow-lg">
+        <thead>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Team Name</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of paginatedUsers">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.userName }}</td>
+            <td>{{ user.managerUsername }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="onPageChange($event)"></p-paginator>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

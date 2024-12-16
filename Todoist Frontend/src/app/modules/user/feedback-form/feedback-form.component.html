@@ -1,0 +1,86 @@
+<div class="feedback-container">
+  <!-- Left Column: Image -->
+  
+
+  <!-- Right Column: Feedback Form -->
+  <div class="feedback-card">
+    <!-- Header Section -->
+    <div class="feedback-header">
+      <fa-icon [icon]="faCheckCircle" class="feedback-logo"></fa-icon>
+      <h1>Give Us Your Feedback</h1>
+      <p>We would love to hear your thoughts and improve based on your experience.</p>
+    </div>
+
+    <!-- Form Section -->
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+      <!-- Star Rating -->
+      <div class="form-group">
+        <label class="rating-label">How would you rate your experience?</label>
+        <div class="rating-stars">
+          <ng-container *ngFor="let star of stars; let i = index">
+            <fa-icon
+              [icon]="star <= rating ? faSolidStar : faRegularStar"
+              (click)="setRating(i + 1)"
+              (mouseover)="hoverRating(i + 1)"
+              (mouseleave)="resetHover()"
+              [ngClass]="{'active-star': star <= rating || star <= hoverRatingValue }"
+              class="star-icon"
+            ></fa-icon>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Feedback Type -->
+      <div class="form-group">
+        <label for="feedbackType">What's this feedback about?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="feedbackType" value="FeatureRequest" [(ngModel)]="feedback.feedbackType" required />
+            Feature Request
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="feedbackType" value="BugReport" [(ngModel)]="feedback.feedbackType" required />
+            Bug Report
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="feedbackType" value="Other" [(ngModel)]="feedback.feedbackType" required />
+            Other
+          </label>
+        </div>
+      </div>
+
+      <!-- Feedback Text -->
+      <div class="form-group">
+        <label for="feedbackText">What would you like to share?</label>
+        <textarea
+          name="feedbackText"
+          rows="4"
+          class="form-control"
+          [(ngModel)]="feedback.feedbackText"
+          placeholder="Tell us about your experience"
+          required
+        ></textarea>
+      </div>
+
+      <!-- Optional Email -->
+      <div class="form-group">
+        <label for="email">Your Email (optional):</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="feedback.email"
+          placeholder="you@example.com"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit" [disabled]="feedbackForm.invalid">
+        Submit Feedback
+      </button>
+
+      <!-- Success Message -->
+      <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
+    </form>
+  </div>
+</div>

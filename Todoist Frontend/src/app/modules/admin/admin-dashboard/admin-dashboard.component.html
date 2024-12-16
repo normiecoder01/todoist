@@ -1,0 +1,205 @@
+<div class="wrapper d-flex flex-column min-vh-100">
+    <app-header></app-header>
+    <main class="container-fluid mt-4 flex-grow-1 d-flex">
+      <!-- Admin Sidebar
+      <nav id="adminSidebar" class="col-md-3 col-lg-2 d-md-block bg-taskify vh-100">
+        <div class="position-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active text-white" (click)="navigateTo('dashboard')">
+                  <i class="pi pi-users"></i> Admin
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link  text-white" (click)="navigateTo('user-management')">
+                <i class="pi pi-users"></i> User Management
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" (click)="navigateTo('task-management')">
+                <i class="pi pi-bookmark-fill"></i> My Task
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  text-white" (click)="navigateTo('user-task-management')">
+                  <i class="pi pi-book"></i> User Task
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" (click)="navigateTo('reports')">
+                <i class="pi pi-chart-bar"></i> All Reports
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav> -->
+
+
+ <!-- Admin Sidebar -->
+<nav id="adminSidebar" class="admin-sidebar vh-100">
+  <div class="sidebar-header d-flex justify-content-between align-items-center px-3 py-2">
+    <h3 class="text-light">Admin Panel</h3>
+    <button class="btn btn-light btn-sm" id="sidebarCollapse">
+      <i class="pi pi-bars"></i>
+    </button>
+  </div>
+  <div class="sidebar-content position-sticky">
+    <ul class="nav flex-column">
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('dashboard')">
+          <i class="pi pi-th-large me-2"></i> Dashboard
+        </a>
+      </li>
+
+      <!-- User Management -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-management')">
+          <i class="pi pi-users me-2"></i> User Management
+        </a>
+      </li>
+
+      <!-- Task Management -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('task-management')">
+          <i class="pi pi-bookmark-fill me-2"></i> My Task
+        </a>
+      </li>
+
+      <!-- User Task Management -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-task-management')">
+          <i class="pi pi-book me-2"></i> User Task
+        </a>
+      </li>
+
+      <!-- Reports -->
+      <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" (click)="navigateTo('reports')">
+          <i class="pi pi-chart-bar me-2"></i> All Reports
+        </a>
+      </li>
+      <div class="mt-5"></div>
+      <div class="mt-5"></div>
+      <li>
+      <div>
+        <button class="btn btn-darkblue me-2">
+          <i class="pi pi-cog"></i> Settings
+        </button>
+        <div class="mt-3"></div>
+        <button class="btn btn-outline-danger"  (click)="onLogOut()" id="logout">
+          <i class="pi pi-power-off"></i> Logout
+        </button>
+      </div>
+    </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+       <!-- Main Content -->
+       <div class="col-md-8 ms-sm-auto col-lg-10">
+        <!-- Your content goes here -->
+        <div class="container-fluid px-4 mt-4">
+          <!-- Dashboard Header -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="dashboard-title">Welcome, Admin!</h1>
+
+          </div>
+
+          <!-- Quick Actions Section -->
+          <section class="quick-actions mb-5">
+            <h2 class="section-title">Quick Actions</h2>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card quick-action-card shadow-sm">
+                  <div class="card-body text-center">
+                    <i class="pi pi-users card-icon"></i>
+                    <h3 class="card-title">User Management</h3>
+                    <p class="card-text">Manage users, assign roles, and monitor user activity.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card quick-action-card shadow-sm">
+                  <div class="card-body text-center">
+                    <i class="pi pi-bookmark-fill card-icon"></i>
+                    <h3 class="card-title">Task Management</h3>
+                    <p class="card-text">View and manage all tasks, deadlines, and priorities.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card quick-action-card shadow-sm">
+                  <div class="card-body text-center">
+                    <i class="pi pi-book card-icon"></i>
+                    <h3 class="card-title">User Tasks</h3>
+                    <p class="card-text">Assign, review, and track tasks assigned to users.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card quick-action-card shadow-sm">
+                  <div class="card-body text-center">
+                    <i class="pi pi-chart-bar card-icon"></i>
+                    <h3 class="card-title">Reports</h3>
+                    <p class="card-text">Generate reports on user performance, tasks, and activity.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Analytics Section (Static Content) -->
+          <section class="analytics-section mb-5">
+            <h2 class="section-title">Analytics Overview</h2>
+            <div class="row">
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card analytics-card shadow-sm">
+                  <div class="card-body">
+                    <h3 class="card-title">Active Users</h3>
+                    <p class="card-text display-4">25</p>
+                    <p class="card-info">Currently logged in and active users.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card analytics-card shadow-sm">
+                  <div class="card-body">
+                    <h3 class="card-title">Tasks Completed</h3>
+                    <p class="card-text display-4">243</p>
+                    <p class="card-info">Total tasks completed today.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card analytics-card shadow-sm">
+                  <div class="card-body">
+                    <h3 class="card-title">Overdue Tasks</h3>
+                    <p class="card-text display-4">24</p>
+                    <p class="card-info">Tasks that are past their deadline.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+        </div>
+
+
+
+      </div>
+
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+
+  <!-- Backdrop and Assign Modal remain unchanged -->

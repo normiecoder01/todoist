@@ -1,0 +1,71 @@
+<header id="header" class="header sticky-top bg-darkblue">
+  <!-- Branding Section -->
+  <div class="branding">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <!-- Logo and Title -->
+      <a class="logo d-flex align-items-center" href="http://localhost:4200/">
+        <img src="../../../../assets/icons/logo.png" alt="Todoist Logo" width="38" />
+        <h3 class="display-6 fs-2 text-light ms-2">Todoist</h3>
+      </a>
+
+      <!-- Navbar Toggler for mobile -->
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+
+    <!-- Main Navigation -->
+    <nav id="navmenu" class="navmenu" *ngIf="!isIndex && !isUser && !isAdmin && !isManager">
+      <ul>
+        <li class="nav-item" *ngIf="!isHome && !isIndex">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLogin && !isIndex">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!isSignup && !isIndex">
+          <a class="nav-link" routerLink="/signup">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://doist.com/about-us" (click)="scrollToFooter()">Contact Us</a>
+        </li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    
+
+      <!-- User Navigation -->
+ <!-- User Navigation -->
+<!-- User Navigation -->
+<nav id="navmenu" class="navmenu" *ngIf="isUser">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <span class="dash-name">{{ dashName }}</span>
+      <button class="btn btn-outline-danger logout-btn" (click)="onLogOut()" id="logout">
+        <i class="pi pi-power-off"></i> Logout
+      </button>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+      <!-- Admin Navigation -->
+      <nav id="navmenu" class="navmenu" *ngIf="isAdmin">
+        <ul class="d-flex align-items-center mb-0">
+          <li class="dropdown">
+            <button class="btn dropdown-toggle custom-dropdown-btn text-light" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="pi pi-user"></i> <span class="dash-name">{{this.dashName}}</span>
+            </button>
+            
+          </li>
+        </ul>
+      </nav>
+
+     
+
+    </div>
+  </div>
+</header>

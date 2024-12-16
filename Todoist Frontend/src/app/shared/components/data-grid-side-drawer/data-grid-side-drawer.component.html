@@ -1,0 +1,114 @@
+<div class="modal-dialog side-drawer" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="nav flex-sm-column flex-row">
+        <div class="mb-3">
+          <p class="modal-title">
+            <fa-icon [icon]="faChevronsRight" (click)="closeModal()"></fa-icon>
+            Edit Row
+          </p>
+          <hr />
+        </div>
+        <div class="d-flex flex-row flex-wrap">
+          <ng-container *ngFor="let data of columnDefs">
+            <ng-container [ngSwitch]="data.columnType">
+              <!-- Input Text -->
+              <div
+                class="col-lg-6 d-flex flex-column mb-4"
+                *ngSwitchCase="'text'"
+              >
+                <label>{{ data.headerName }}:</label>
+                <input type="text" [(ngModel)]="rowData.data[data.field]" />
+              </div>
+              <!-- Input Number -->
+              <div
+                class="col-lg-6 d-flex flex-column mb-4"
+                *ngSwitchCase="'number'"
+              >
+                <label>{{ data.headerName }}:</label>
+                <input
+                  class="input-number"
+                  type="number"
+                  [(ngModel)]="rowData.data[data.field]"
+                />
+              </div>
+              <!-- Input Boolean -->
+              <div class="col-lg-6 mb-4" *ngSwitchCase="'boolean'">
+                <label class="col-form-label">{{ data.headerName }}:</label>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [(ngModel)]="rowData.data[data.field]"
+                  />
+                </div>
+              </div>
+              <!-- Input Dropdown -->
+              <div
+                class="col-lg-6 d-flex flex-column mb-4"
+                *ngSwitchCase="'dropdown'"
+              >
+                <label>{{ data.headerName }}:</label>
+                <ng-select
+                  [placeholder]="
+                    rowData.data[data.field] ? '' : 'Select an option'
+                  "
+                  [clearable]="false"
+                  [(ngModel)]="rowData.data[data.field]"
+                  [items]="data.dropdownValues.values"
+                  [searchable]="false"
+                  [bindLabel]="rowData.data[data.field]"
+                  [bindValue]="rowData.data[data.field]"
+                  class="form-group px-2 w-100"
+                  appendTo="body"
+                >
+                </ng-select>
+              </div>
+              <!-- Input Link -->
+              <div
+                class="col-lg-6 d-flex flex-column mb-4"
+                *ngSwitchCase="'link'"
+              >
+                <label>{{ data.headerName }}:</label>
+                <input type="url" [(ngModel)]="rowData.data[data.field]" />
+              </div>
+              <!-- Input Date -->
+              <div
+                class="col-lg-6 d-flex flex-column mb-4"
+                *ngSwitchCase="'dateTime'"
+              >
+                <label>{{ data.headerName }}:</label>
+                <input
+                  type="dateTime-local"
+                  [(ngModel)]="rowData.data[data.field]"
+                />
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer d-flex justify-content-between">
+      <button type="button" class="btn btn-danger" (click)="deleteRecord()">
+        Delete
+      </button>
+      <div>
+        <button
+          type="button"
+          class="btn btn-secondary ml-3"
+          (click)="closeModal()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary ml-3"
+          (click)="updateData()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

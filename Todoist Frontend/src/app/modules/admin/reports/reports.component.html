@@ -1,0 +1,166 @@
+<div class="wrapper d-flex flex-column min-vh-100">
+    <app-header></app-header>
+   
+    <main class="container-fluid mt-4 flex-grow-1 d-flex">
+        
+     <!-- Admin Sidebar -->
+     <nav id="adminSidebar" class="admin-sidebar vh-100">
+      <div class="sidebar-header d-flex justify-content-between align-items-center px-3 py-2">
+        <h3 class="text-light">Admin Panel</h3>
+        <button class="btn btn-light btn-sm" id="sidebarCollapse">
+          <i class="pi pi-bars"></i>
+        </button>
+      </div>
+      <div class="sidebar-content position-sticky">
+        <ul class="nav flex-column">
+          <!-- Dashboard -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('dashboard')">
+              <i class="pi pi-th-large me-2"></i> Dashboard
+            </a>
+          </li>
+    
+          <!-- User Management -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-management')">
+              <i class="pi pi-users me-2"></i> User Management
+            </a>
+          </li>
+    
+          <!-- Task Management -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('task-management')">
+              <i class="pi pi-bookmark-fill me-2"></i> My Task
+            </a>
+          </li>
+    
+          <!-- User Task Management -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('user-task-management')">
+              <i class="pi pi-book me-2"></i> User Task
+            </a>
+          </li>
+    
+          <!-- Reports -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" (click)="navigateTo('reports')">
+              <i class="pi pi-chart-bar me-2"></i> All Reports
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+       <!-- Main Content -->
+        <!-- Your content goes here -->
+      
+        <div class="container mt-5">
+          <!-- Header Section -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h1 class="display-6 text-darkblue">Admin Reports</h1>
+              <p class="text-muted">Get insights into task management with detailed reports. Download and explore.</p>
+            </div>
+          </div>
+        
+          <!-- Report Cards Section -->
+          <div class="row g-4">
+            <!-- Overdue Tasks Report -->
+            <div class="col-md-4">
+              <div class="card report-card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <i class="pi pi-calendar-times display-4 text-primary mb-3"></i>
+                  <h5 class="card-title">Overdue Tasks Report</h5>
+                  <p class="card-text text-muted">View and download all overdue tasks in Excel format.</p>
+                  <button pButton class="btn btn-primary w-100" (click)="downloadOverdueTasks()">Download Report</button>
+                </div>
+              </div>
+            </div>
+        
+          
+        
+            <!-- No Due Date Tasks Report -->
+            <div class="col-md-4">
+              <div class="card report-card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <i class="pi pi-exclamation-circle display-4 text-danger mb-3"></i>
+                  <h5 class="card-title">No Due Date Tasks Report</h5>
+                  <p class="card-text text-muted">View and download tasks without due dates and quickly fetch insights.</p>
+                  <button pButton class="btn btn-primary w-100" (click)="downloadNoDueDateTasks()">Download Report</button>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Tasks Closed After Noon Report -->
+            <div class="col-md-4">
+              <div class="card report-card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <i class="pi pi-clock display-4 text-info mb-3"></i>
+                  <h5 class="card-title">Tasks Closed After Noon</h5>
+                  <p class="card-text text-muted">View tasks closed after 12:00 PM in Excel format.</p>
+                  <div class="mt-4"></div>
+                  <button pButton class="btn btn-primary w-100 mt-3" (click)="downloadTasksClosedAfterNoon()">Download Report</button>
+                </div>
+              </div>
+            </div>
+
+
+              <!-- Daily Task Count Report -->
+              <div class="col-md-4">
+                <div class="card report-card shadow-sm border-0">
+                  <div class="card-body text-center">
+                    <i class="pi pi-chart-line display-4 text-warning mb-3"></i>
+                    <h5 class="card-title">Daily Task Count Report</h5>
+                    <p class="card-text text-muted">Select a date range to view the task count.</p>
+                    <div class="d-flex justify-content-between mb-2">
+                      <p-calendar [(ngModel)]="dateFrom" placeholder="From" [showIcon]="true"></p-calendar>
+                      <p-calendar [(ngModel)]="dateTo" placeholder="To" [showIcon]="true"></p-calendar>
+                    </div>
+                    <button pButton class="btn btn-primary w-100" (click)="downloadDailyTaskCount()">Download Report</button>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Completed Tasks Report -->
+              <div class="col-md-4">
+                <div class="card report-card shadow-sm border-0">
+                  <div class="card-body text-center">
+                    <i class="pi pi-check-circle display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Completed Tasks Report</h5>
+                    <p class="card-text text-muted">Select a date range to view completed tasks.</p>
+                    <div class="d-flex justify-content-between mb-2">
+                      <p-calendar [(ngModel)]="dateFromCompleted" placeholder="From" [showIcon]="true"></p-calendar>
+                      <p-calendar [(ngModel)]="dateToCompleted" placeholder="To" [showIcon]="true"></p-calendar>
+                    </div>
+                    <button pButton class="btn btn-primary w-100" (click)="downloadCompletedTasks()">Download Report</button>
+                  </div>
+                </div>
+              </div>
+
+                  <!-- User Task Count Report -->
+              <div class="col-md-4">
+                <div class="card report-card shadow-sm border-0">
+                  <div class="card-body text-center">
+                    <i class="pi pi-check-circle display-4 text-success mb-3"></i>
+                    <h5 class="card-title">User Task Count Report</h5>
+                    <p class="card-text text-muted">Get a Comprehensive report of task status in the system</p>
+                    <div class="d-flex justify-content-between mb-2">
+            
+                    </div>
+                    <div class="mt-4"></div>
+                    <a href="http://localhost:4200/admin/welcome">
+                    <button pButton class="btn btn-primary w-100" >View  Report</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+        </div>
+    </main>
+  
+    <app-footer></app-footer>
+  </div>
+  
+  <!-- Backdrop and Assign Modal remain unchanged -->
+  

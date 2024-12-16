@@ -1,0 +1,61 @@
+/* General Layout */
+.signin-container {
+  height: 100vh;
+  background-color: #F0F6F6;
+}
+
+.signin-bg {
+  background-color: #084B83;
+}
+
+.login-form-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+/* Text and Form Styles */
+.login-form-container h2 {
+  font-weight: 700;
+  color: #084B83;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #374048;
+}
+
+.control-error {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.text-primary {
+  color: #084B83;
+}
+
+.text-primary:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles */
+.btn-darkblue {
+  background-color: #084B83;
+  color: #F0F6F6;
+  border-color: transparent;
+}
+
+.btn-darkblue:hover {
+  background-color: #063761;
+}
+
+/* Forgot Password Link */
+.text-decoration-none {
+  color: #084B83;
+  text-decoration: none;
+}
+
+.text-decoration-none:hover {
+  text-decoration: underline;
+}

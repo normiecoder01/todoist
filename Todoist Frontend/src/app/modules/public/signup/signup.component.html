@@ -1,0 +1,118 @@
+<app-header></app-header>
+<div class="container-fluid signup-container vh-100">
+  <div class="row h-100">
+    <!-- Left Side with Welcome Message -->
+    <div class="col-lg-7 d-none d-lg-flex align-items-center justify-content-center signup-bg">
+      <div class="text-light text-center p-5">
+        <h1 class="text-light display-6">Boost Your Productivity with Todoist</h1>
+        <p>Organize your tasks, manage priorities, and achieve your goals efficiently with our intelligent task management features.</p>
+        <a routerLink="" class="btn btn-outline-light rounded-pill mt-3">Learn More →</a>
+      </div>
+    </div>
+
+    <!-- Right Side with Sign-Up Form -->
+    <div class="col-lg-5 d-flex justify-content-center align-items-center bg-light">
+      <div class="signup-form-container w-75">
+        <div class="text-center mb-4">
+          <img src="../../../../assets/icons/logo.png" alt="Todoist Logo" class="mb-4" width="40" />
+          <h2>Create Your Todoist Account</h2>
+          <p>Already have an account? <a routerLink="/login" class="text-primary">Login</a></p>
+        </div>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstname" class="form-label">First Name:</label>
+              <input type="text" id="firstname" class="form-control" formControlName="firstname" />
+              <div *ngIf="f['firstname'].touched && f['firstname'].invalid">
+                <small *ngIf="f['firstname'].errors?.['required']" class="text-danger">First name is required.</small>
+                <small *ngIf="f['firstname'].errors?.['pattern']" class="text-danger">Invalid first name format.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="lastname" class="form-label">Last Name:</label>
+              <input type="text" id="lastname" class="form-control" formControlName="lastname" />
+              <div *ngIf="f['lastname'].touched && f['lastname'].invalid">
+                <small *ngIf="f['lastname'].errors?.['required']" class="text-danger">Last name is required.</small>
+                <small *ngIf="f['lastname'].errors?.['pattern']" class="text-danger">Invalid last name format.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address:</label>
+            <input type="email" id="email" class="form-control" formControlName="email" />
+            <div *ngIf="f['email'].touched && f['email'].invalid">
+              <small *ngIf="f['email'].errors?.['required']" class="text-danger">Email is required.</small>
+              <small *ngIf="f['email'].errors?.['email']" class="text-danger">Invalid email format.</small>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="mobileno" class="form-label">Mobile Number:</label>
+              <input type="text" id="mobileno" class="form-control" formControlName="mobileno" />
+              <div *ngIf="f['mobileno'].touched && f['mobileno'].invalid">
+                <small *ngIf="f['mobileno'].errors?.['required']" class="text-danger">Mobile number is required.</small>
+                <small *ngIf="f['mobileno'].errors?.['pattern']" class="text-danger">Mobile number must be 10 digits.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="username" class="form-label">Username:</label>
+              <input type="text" id="username" class="form-control" formControlName="username" />
+              <div *ngIf="f['username'].touched && f['username'].invalid">
+                <small *ngIf="f['username'].errors?.['required']" class="text-danger">Username is required.</small>
+                <small *ngIf="f['username'].errors?.['pattern']" class="text-danger">Invalid username format.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input type="password" id="password" class="form-control" formControlName="password" />
+              <div *ngIf="f['password'].touched && f['password'].invalid">
+                <small *ngIf="f['password'].errors?.['required']" class="text-danger">Password is required.</small>
+                <small *ngIf="f['password'].errors?.['passwordStrength']" class="text-danger">
+                  Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="confirmpassword" class="form-label">Confirm Password:</label>
+              <input type="password" id="confirmpassword" class="form-control" formControlName="confirmpassword" />
+              <div *ngIf="f['confirmpassword'].touched && f['confirmpassword'].invalid">
+                <small *ngIf="f['confirmpassword'].errors?.['required']" class="text-danger">Confirm password is required.</small>
+              </div>
+              <div *ngIf="signupForm.errors?.['mismatch'] && (f['confirmpassword'].dirty || f['confirmpassword'].touched)">
+                <small class="text-danger">Passwords do not match.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="isAgreed" formControlName="isAgreed" />
+            <label class="form-check-label" for="isAgreed">I agree to the terms and conditions</label>
+            <div *ngIf="f['isAgreed'].touched && f['isAgreed'].invalid">
+              <small *ngIf="f['isAgreed'].errors?.['required']" class="text-danger">You must agree to the terms and conditions.</small>
+            </div>
+          </div>
+
+          <div class="form-buttons text-center mt-4">
+            <button type="submit" class="btn btn-darkblue w-100" [disabled]="signupForm.invalid">Register</button>
+          </div>
+
+          <div class="text-center mt-3">
+            <span>Already have an account?
+              <a class="login" routerLink="/login">Login</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

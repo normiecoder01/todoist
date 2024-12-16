@@ -1,0 +1,63 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-table" matSort>
+      
+      <!-- User ID Column -->
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef> User Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+      </ng-container>
+  
+      <!-- User Name Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef> User Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+      </ng-container>
+  
+      <!-- Pending Task Column -->
+      <ng-container matColumnDef="pendingTasks">
+        <th mat-header-cell *matHeaderCellDef> Pending Task Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.pendingTaskCount}} </td>
+      </ng-container>
+  
+      <!-- Completed Task Column -->
+      <ng-container matColumnDef="completedTasks">
+        <th mat-header-cell *matHeaderCellDef> Completed Task Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.completedTaskCount}} </td>
+      </ng-container>
+  
+      <!-- Overdue Task Column -->
+      <ng-container matColumnDef="overdueTasks">
+        <th mat-header-cell *matHeaderCellDef> Overdue Task Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.overdueTaskCount}} </td>
+      </ng-container>
+  
+      <!-- High Priority Task Column -->
+      <ng-container matColumnDef="highPriorityTasks">
+        <th mat-header-cell *matHeaderCellDef> High Priority Task Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.highPriorityTaskCount}} </td>
+      </ng-container>
+  
+      <!-- Medium Priority Task Column -->
+      <ng-container matColumnDef="mediumPriorityTasks">
+        <th mat-header-cell *matHeaderCellDef> Medium Priority Task Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.mediumPriorityTaskCount}} </td>
+      </ng-container>
+  
+      <!-- Low Priority Task Column -->
+      <ng-container matColumnDef="lowPriorityTasks">
+        <th mat-header-cell *matHeaderCellDef> Low Priority Task Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.lowPriorityTaskCount}} </td>
+      </ng-container>
+  
+      <!-- Table Headers and Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <!-- Pagination -->
+    <mat-paginator [length]="dataSource.data.length"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+  

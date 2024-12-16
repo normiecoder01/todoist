@@ -1,0 +1,142 @@
+/* Fonts */
+@import 'ag-grid-community/styles//ag-grid.css';
+ 
+@import 'ag-grid-community/styles//ag-theme-alpine.css';
+ 
+@import 'ag-grid-community/styles//ag-theme-balham.css';
+ 
+@import 'ag-grid-community/styles//ag-theme-material.css';
+
+:root {
+  --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
+}
+
+/* Global Colors - Green and White Minimal Theme */
+:root {
+  --background-color: #ffffff;
+  /* Background color for the entire website */
+  --default-color: #7e7e7e;
+  /* Default color used for the majority of the text content */
+  --heading-color: #4e4e4e;
+  /* Color for headings and titles */
+  --accent-color: #34c759;
+  /* Taskify's green color used for buttons, links, and standout elements */
+  --surface-color: #f8f9fa;
+  /* Light background color for cards and boxed sections */
+  --contrast-color: #ffffff;
+  /* White text for contrast on accent-colored backgrounds */
+}
+
+/* Nav Menu Colors - For Navigation Customization */
+:root {
+  --nav-color: #333333;
+  /* Default color of the main navmenu links */
+  --nav-hover-color: #34c759;
+  /* Green color when navmenu links are hovered over */
+  --nav-mobile-background-color: #ffffff;
+  /* White background for mobile navigation */
+  --nav-dropdown-background-color: #ffffff;
+  /* White background for dropdown items */
+  --nav-dropdown-color: #135e02;
+  /* Dark text color for dropdown items */
+  --nav-dropdown-hover-color: #34c759;
+  /* Green color when dropdown items are hovered over */
+}
+
+/* Color Presets - These classes provide color overrides for light and dark themes */
+.light-background {
+  --background-color: #f9f9f9;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #0c2319;
+  --default-color: #adb5bd;
+  --heading-color: #ffffff;
+  --surface-color: #12722a;
+  --contrast-color: #ffffff;
+}
+
+/* Smooth Scroll */
+:root {
+  scroll-behavior: smooth;
+}
+
+
+
+/*--------------------------------------------------------------
+# General Styling & Shared Classes
+--------------------------------------------------------------*/
+body {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-family: var(--default-font);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+/* Button Styling */
+.btn-success {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.btn-success:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: var(--contrast-color);
+}
+
+/* Additional Section Styling */
+.section {
+  padding: 60px 0;
+}
+
+.section-light {
+  background-color: var(--light-background);
+}
+
+.section-dark {
+  background-color: var(--dark-background);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.lead {
+  color: var(--default-color);
+  font-size: 1.25rem;
+}
+
+/* Taskify Green Theme */
+.highlight {
+  color: var(--accent-color);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,56 @@
+.signup-container {
+  height: 100vh;
+  background-color: #F0F6F6;
+}
+
+.signup-bg {
+  background-color: #084B83;
+}
+
+.signup-form-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.signup-form h2 {
+  font-weight: 700;
+  color: #084B83;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #374048;
+}
+
+.btn-darkblue {
+  background-color: #084B83;
+  color: #F0F6F6;
+  border-color: transparent;
+}
+
+.btn-darkblue:hover {
+  background-color: #063761;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+a.text-primary {
+  color: #084B83;
+}
+
+a.text-primary:hover {
+  text-decoration: underline;
+}
+
+.form-check-label a {
+  color: #007bff;
+}
+
+.form-check-label a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,25 @@
+.bg-darkgrey {
+  background-color: #0F1108;
+}
+
+.text-light {
+  color: #F0F6F6;
+}
+
+.footer .list-unstyled a {
+  color: #BBE6E4;
+  text-decoration: none;
+}
+
+.footer .list-unstyled a:hover {
+  color: #A3D4D3;
+}
+
+.footer i {
+  font-size: 1.5rem;
+  color: #BBE6E4;
+}
+
+.footer i:hover {
+  color: #F0F6F6;
+}
